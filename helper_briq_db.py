@@ -95,6 +95,9 @@ def checkNaNReturnNone(valueCheck):
 def getDBConnection():
     return mysql.connector.connect(user=config['msql_database']['username'], password=config['msql_database']['password'], host=config['msql_database']['host'], database=config['msql_database']['database'])
 
+def getMongoDBConnection():
+    return MongoClient(config['mongo_database']['host'], config['mongo_database']['port'])
+
 def ImportAllDataFromExcelToMySQL():
     df = pd.read_excel(config['excel_file']['excelFileName'], sheet_name=config['excel_file']['sheetName'])
 
@@ -225,7 +228,7 @@ def updateQuote(objectQuote):
 
 def pushSinqleQuoteToMongo(singleQuoteObject):
     try:
-        connection = MongoClient('localhost', 27017)
+        connection = getMongoDBConnection()
         my_database = connection.briqApp
         data = my_database.quote
         
@@ -284,7 +287,7 @@ def removeQuotes(objectQuote):
 
 def pushDataToMongo(df):
     try:
-        connection = MongoClient('localhost', 27017)
+        connection = getMongoDBConnection()
         my_database = connection.briqApp
         data = my_database.quote
         
@@ -319,7 +322,7 @@ def getUnratedQuotes():
 def recommendedQuotes():
     records = None
     try:
-        connection = MongoClient('localhost', 27017)
+        connection = getMongoDBConnection()
         my_database = connection.briqApp
         data = my_database.quote
         cursor = data.find()

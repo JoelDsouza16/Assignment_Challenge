@@ -91,24 +91,5 @@ def similarCommand():
     
     return jsonify( {"data": db_helper.getSimilarityQuotes(), "msg": "OK" })
 
-
-
-
-
-#
-
-# 1. GET ALL QUOTES - returns an array with all the quotes (1 marks)
-# 2. ADD QUOTE - insert a new quote with the schema given above (1 marks)
-# 3. RATE QUOTE - save/update the rating(1-5) of quote and if rating more
-# than three then save it into recommended quotes table (2 marks)
-# 4*. GET RELATED QUOTE - returns the related unrated quote from the
-# unrated quotelist which has matching words from the recommended quotes
-# table (6 marks)
-# 5. GET RATED QUOTES- return quotes rated by user. (2 marks)
-# 6. DELETE QUOTE -
-
-
-
-
 if __name__ == '__main__':
     app.run(port= config['serve_run']['port'])
